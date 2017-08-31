@@ -15,5 +15,45 @@ div {
 
 /*selettore per id */
 #cast {
-    border: 1px solid black;
+    border-left: 10px solid red;
+    border-right: 10px solid black;
+    border-top: 10px solid red;
+    border-bottom: 10px solid black;
+    padding-left: 20px;
+    
+}
+
+.lista-ss.lista-or {
+    font-family: Roboto, sans-serif;
+    font-size: 14pt;
+    color: #142c54;
+}
+
+.lista-ss *{
+    color: red;
+}
+
+
+.lista-ss *:link{
+    color: #142c54;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.lista-ss *:hover{
+    text-decoration: underline;
+}
+
+
+#cast::after {
+    content: "";
+    background-image: url("../img/alanturing.jpg");
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+    
+}
+
+#cast::before{
+    content:"------";
 }
