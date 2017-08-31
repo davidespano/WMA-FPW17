@@ -1,0 +1,19 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 31-ago-2017, 12.27.07
+    Author     : davide
+*/
+
+/* selettore con nome del tag */
+div {
+    background-color: #aeccfc;
+}
+
+/*selettore per id */
+#cast {
+    border: 1px solid black;
+}
