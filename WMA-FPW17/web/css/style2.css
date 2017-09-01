@@ -33,11 +33,13 @@ h2 {
     border-bottom: 2px solid #012f7a;
 }
 
+
 .main {
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 25%;
 }
+
 
 nav {
     width: 25%;
@@ -46,10 +48,22 @@ nav {
     
 }
 
+/* stili per layout a dimensione fissa. Eliminare per avere
+  un layout fluido. 
 .container {
     width: 80%;
     margin: auto;
     background-color: white;
 }
+*/
+
+.container{
+    background-color: white;
+}
+
+/* tutorial w3c su layout a griglia
+   https://www.w3schools.com/css/css_rwd_grid.asp
+*/
+
 
 
