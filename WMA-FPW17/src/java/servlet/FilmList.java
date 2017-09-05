@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Film;
 
 /**
  *
@@ -41,8 +42,12 @@ public class FilmList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<String> titoli = new ArrayList<>();
-        List<Integer> ids = new ArrayList<>();
+        // ---- vecchia versione  ----
+        //List<String> titoli = new ArrayList<>();
+        //List<Integer> ids = new ArrayList<>();
+        
+        // ---- nuova versione ----
+        List<Film> films = new ArrayList();
         
         // Inizializzo la connessione
         String db = "jdbc:derby://localhost:1527/film";
@@ -67,8 +72,16 @@ public class FilmList extends HttpServlet {
             int count = 0;           
             while(set.next()){
                 count++;
-                ids.add(set.getInt("id"));
-                titoli.add(set.getString("titolo"));
+                
+                // ----- vecchia versione -----
+                //ids.add(set.getInt("id"));
+                //titoli.add(set.getString("titolo"));
+                
+                Film film = new Film();
+                film.setId(set.getInt("id"));
+                film.setTitolo(set.getString("titolo"));
+                
+                films.add(film);
             }
             
             // non ci sono righe
@@ -77,8 +90,11 @@ public class FilmList extends HttpServlet {
                 
             }
           
-            request.setAttribute("ids", ids);
-            request.setAttribute("titoli", titoli);
+            // ---- vecchia versione ------
+            //request.setAttribute("ids", ids);
+            //request.setAttribute("titoli", titoli);
+            
+            request.setAttribute("films", films);
             
             // Chiusura della connessione
             conn.close();

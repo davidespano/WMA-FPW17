@@ -15,6 +15,25 @@ public class Film {
     private String riassunto;
     private String imgUrl;
     
+    // costruttore vuoto
+    public Film(){
+        this.id = -1;
+        this.titolo = "";
+        this.riassunto = "";
+        this.imgUrl = "";
+    }
+    
+    public Film(int id, String titolo){
+        this(id, titolo, null, null);
+    }
+    
+    // costruttore generale
+    public Film(int id, String titolo, String riassunto, String imgUrl){
+        this.id = id;
+        this.titolo = titolo;
+        this.riassunto = riassunto;
+        this.imgUrl = imgUrl;
+    }
     
     public int getId(){
         return this.id;

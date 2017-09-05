@@ -79,10 +79,21 @@
 
                     <h2 id="synopsis">Lista Film</h2>
                     <ul>
-                        <c:forEach var="i" begin="0" end="${ids.size() -1}">
+                        <!-- vecchia versione 
+                        <c :forEach var="i" begin="0" end="{ids.size() -1}">
                             <li>
-                                <a href="PrimoAccessoDB?id=${ids.get(i)}">
-                                     ${titoli.get(i)}
+                                <a href="PrimoAccessoDB?id={ids.get(i)}">
+                                     {titoli.get(i)}
+                                </a>
+                            </li>
+                        </c :forEach>
+                        -->
+                        
+                        <!-- nuova versione -->
+                        <c:forEach items="${films}" var="film">
+                            <li>
+                                <a href="PrimoAccessoDB?id=${film.getId()}">
+                                     ${film.getTitolo()}
                                 </a>
                             </li>
                         </c:forEach>
