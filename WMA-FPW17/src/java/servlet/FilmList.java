@@ -12,6 +12,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author davide
  */
-@WebServlet(name = "PrimoAccessoDB", urlPatterns = {"/PrimoAccessoDB"})
-public class PrimoAccessoDB extends HttpServlet {
+@WebServlet(name = "FilmList", urlPatterns = {"/FilmList"})
+public class FilmList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,24 +41,12 @@ public class PrimoAccessoDB extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String titolo = null;
-        String riassunto = null;
-        int id = 0;
+        List<String> titoli = new ArrayList<>();
+        List<Integer> ids = new ArrayList<>();
         
-        String idGet = request.getParameter("id");
-        
-        // Inizializzo la libreria per la connessione al database
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PrimoAccessoDB.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-
         // Inizializzo la connessione
         String db = "jdbc:derby://localhost:1527/film";
-
+        
         try {
             // creazione e apertura della connessione
             // si specifica la url, lo username e la password per il db
@@ -67,10 +57,7 @@ public class PrimoAccessoDB extends HttpServlet {
             
             // creo la query
             
-            // ATTENZIONE: non crearle mai per concatenazione di stringhe
-            // questo apre alla SQL injection
-            String query = "select id, titolo, riassunto from film "
-                    + "where id = " + idGet;
+            String query = "select id, titolo from film ";
             
             ResultSet set = stmt.executeQuery(query);
             
@@ -80,13 +67,8 @@ public class PrimoAccessoDB extends HttpServlet {
             int count = 0;           
             while(set.next()){
                 count++;
-                // accesso per nome colonna
-                id = set.getInt("id");
-                
-                // accesso per indice, inizia a contare da 1
-                titolo = set.getString(2);
-                
-                riassunto = set.getString("riassunto");
+                ids.add(set.getInt("id"));
+                titoli.add(set.getString("titolo"));
             }
             
             // non ci sono righe
@@ -95,20 +77,17 @@ public class PrimoAccessoDB extends HttpServlet {
                 
             }
           
-            
+            request.setAttribute("ids", ids);
+            request.setAttribute("titoli", titoli);
             
             // Chiusura della connessione
             conn.close();
             
         } catch (SQLException ex) {
-            Logger.getLogger(PrimoAccessoDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FilmList.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.setAttribute("titolo", titolo);
-        request.setAttribute("riassunto", riassunto);
-        
-        request.getRequestDispatcher("jsp/schedaFilm.jsp").forward(request, response);
-
+        request.getRequestDispatcher("jsp/listaFilm.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
