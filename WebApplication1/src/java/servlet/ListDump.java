@@ -6,7 +6,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -51,6 +50,7 @@ public class ListDump extends HttpServlet {
                 // il valore della variabile nella jsp che ha nome sequenza
                 lista
         );
+        
         
         // richiamo la jsp dalla servlet
         request.getRequestDispatcher("jsp/listView.jsp")
