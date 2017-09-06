@@ -80,6 +80,9 @@ public class ListDb extends HttpServlet {
                 lista.add(titolo);
             }
             
+            // chiudo la connessione con il db
+            conn.close();
+            
             lista.add("");
             lista.add("");
             
