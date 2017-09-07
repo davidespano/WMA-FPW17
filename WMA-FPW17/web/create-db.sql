@@ -27,4 +27,6 @@ a Il Signore degli Anelli - Il ritorno del re e Ben-Hur.)'),
 
 (default, 'Armageddon', 'Armageddon - Giudizio finale (Armageddon) è un film 
 del 1998 diretto da Michael Bay. Negli Stati uniti uscì il 1 luglio del 1998, 
-mentre nelle sale Italiane arrivò il 4 settembre dello stesso anno.')
+mentre nelle sale Italiane arrivò il 4 settembre dello stesso anno.');
+
+select * from users where user= ? and password = ?
