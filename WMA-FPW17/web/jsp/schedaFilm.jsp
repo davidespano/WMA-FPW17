@@ -19,13 +19,9 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <header>
-                        <h1>CineFPW</h1>
-                    </header>
-                </div>
-            </div>
+           
+             <!-- header -->
+            <jsp:include page="header.jsp"/>
 
             <div class="row">
                 <div class="col-3">
@@ -177,13 +173,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <footer>
-                        Copyright Davide Spano (molto bello).
-                    </footer>
-                </div>
-            </div>
+             <!-- footer -->
+            <jsp:include page="footer.jsp"/>
 
         </div>
     </body>
