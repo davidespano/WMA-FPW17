@@ -82,6 +82,12 @@ public class UserFactory {
         return toReturn;
     }
     
+    /**
+     * Ricerca un utente tramite username e password
+     * @param username lo username da ricercare
+     * @param password la password da ricercare
+     * @return un oggetto User nel caso l'utente sia stato trovato, null altrimenti
+     */
     public User getUserByUsernamePassword(String username, String password){
         User toReturn = null;
         
