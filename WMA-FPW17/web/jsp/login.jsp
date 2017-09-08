@@ -25,6 +25,8 @@
             <div class="row">
                 <div class="col-3">
                     <nav>
+                        
+
                         <h2>Contents</h2>
                         <!-- lista non ordinata -->
                         <h3>Lista non ordinata </h3>
@@ -68,27 +70,27 @@
                         </ul>
                     </nav>
                 </div>
-                
+
                 <div class="col-9">
                     <c:if test="${auth_errato}">
-                         <p>Username o password errati</p>
+                        <p>Username o password errati</p>
                     </c:if>
-                   
+
                     <h2 id="synopsis">Login</h2>
                     <form method="post" action="Login">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="user"
                                placeholder="Il nome con cui ti sei registrato"/>
-                        
+
                         <label for="password">Password</label>
                         <input type="password" id="password" name="pass" />
-                        
+
                         <button type="submit" name="login" id="login">
                             Login
                         </button>
                     </form>
-                    
-                    
+
+
                 </div>
             </div>
 

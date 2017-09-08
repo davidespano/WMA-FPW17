@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 import model.UserFactory;
 
@@ -35,6 +36,21 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         
         String pageToLoad = "jsp/login.jsp";
+        
+        // restituisce un oggetto che rappresenta la sessione
+        // solo nel caso sia stato inizializzato ad una richesta precedente
+        // altrimenti restituisce null
+        HttpSession session = request.getSession(false);
+        UserFactory factory = new UserFactory();
+        
+        if(session != null && session.getAttribute("userId") != null){
+           // utente è già autenticato 
+           pageToLoad = "/FilmList";
+           int id = (int) session.getAttribute("userId");
+           User user = factory.getUserById(id);
+           request.setAttribute("user", user);
+        }
+        
         if(request.getParameter("login") != null){
             // se il parametro login è diverso da null, allora il mio utente
             // ha premuto il pulsante di login
@@ -44,18 +60,38 @@ public class Login extends HttpServlet {
             String password = request.getParameter("pass");
             
             // leggo i dati dal db
-            UserFactory factory = new UserFactory();
+            
             User user = factory.getUserByUsernamePassword(username, password);
             
             if(user != null){
                 // l'utente è autenticato, lo portiamo alla lista di Film
                 pageToLoad = "/FilmList";
+                
+                // inizializzo la sessione. Se non esisteva alla richiesta
+                // precedente, ne creo una nuova (parametro del metodo a true)
+                session = request.getSession(true);
+                
+                // creo una variabile di sessione, questo indica che sia
+                // autenticato
+                session.setAttribute("userId", user.getId());
+                
+                request.setAttribute("user", user);
+                
             }else{
                 request.setAttribute("auth_errato", true);
                 
                 // utente non autenticato lo rimando al login
                 pageToLoad = "jsp/login.jsp";
             }
+            
+        }
+        
+        if(request.getParameter("logout") != null){
+            // abbiamo premuto sul link di logout
+            if(session != null)
+                session.invalidate();
+            pageToLoad = "jsp/login.jsp";
+            request.setAttribute("user", null);
             
         }
         
