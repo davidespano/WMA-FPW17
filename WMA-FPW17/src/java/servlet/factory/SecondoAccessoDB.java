@@ -11,8 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Film;
 import model.FilmFactory;
+import model.User;
+import model.UserFactory;
 
 /**
  *
@@ -32,8 +35,27 @@ public class SecondoAccessoDB extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         FilmFactory factory = new FilmFactory();
+        UserFactory userFactory = new UserFactory();
+        User user = null;
+        HttpSession session = request.getSession(false);
+        if(session != null && session.getAttribute("userId") != null){
+            // l'utente è autenticato, recupero l'utente tramite
+            // il suo identificatore salvato in sessione
+            int userId = (int) session.getAttribute("userId");
+            user = userFactory.getUserById(userId);
+            request.setAttribute("user", user);
+        }else{
+            // non è autenticato, lo rimando alla login, lo faccio con una 
+            // redirect nella risposta (il browser carica in automatico la nuova
+            // URL)
+            
+            response.sendRedirect("Login");
+            return;
+        }
+
+        
         int id = -1;
         Film film = null;
         if (request.getParameter("id") != null) {
@@ -44,13 +66,19 @@ public class SecondoAccessoDB extends HttpServlet {
         if (request.getParameter("delete") != null) {
             // richiesta di cancellazione
             int delete = Integer.parseInt(request.getParameter("delete"));
-            boolean deleted = factory.deleteFilm(delete);
+            film = factory.getFilmById(delete);
+            boolean deleted = user.canDelete(film) && factory.deleteFilm(delete);
             if (deleted) {
                 // per non riscrivere una jsp diversa inserisco il messaggio
                 // in un film fittizio.
                 film = new Film();
                 film.setTitolo("Film con identificatore " + delete
                         + " cancellato");
+            }else{
+                // mostriamo un messaggio di errore nella cancellazione
+                film = new Film();
+                film.setTitolo("Film con identificatore " + delete
+                        + " non cancellato");
             }
         }
 

@@ -75,4 +75,18 @@ public class User {
         this.type = type;
     }
     
+    public boolean canDelete(Film film){
+        // l'utente davide può cancellare solo il film con identificatore 1
+        // tutti gli altri no. L'amministratore può cancellare tutto.
+        if(this.getType() == User.ADMIN){
+            return true;
+        }
+        
+        if(this.getUsername().equals("davide") && film.getId() == 1){
+            return true;
+        }
+        
+        return false;
+    }
+    
 }

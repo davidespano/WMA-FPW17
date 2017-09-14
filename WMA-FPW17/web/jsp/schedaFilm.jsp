@@ -19,8 +19,8 @@
     </head>
     <body>
         <div class="container">
-           
-             <!-- header -->
+
+            <!-- header -->
             <jsp:include page="header.jsp"/>
 
             <div class="row">
@@ -69,28 +69,31 @@
                         </ul>
                     </nav>
                 </div>
-                
+
                 <div class="col-9">
 
 
                     <h2 id="synopsis">${film.getTitolo()}</h2>
-                    
-                    <div id="edit">
-                        <a href="./FactorySecondoAccessoDB?delete=${film.getId()}">
-                            Cancella il film tramite link
-                        </a><br/>
-                        <form method="post" action="./FactorySecondoAccessoDB">
-                            <input type="hidden" name="delete" value="${film.getId()}"/>
-                            <button type="submit" name="deleteBnt">
-                                Cancella tramite pulsante
-                            </button>
-                        </form>
-                    </div>
-                    
+
+                    <c:if test="${user != null && user.canDelete(film)}">
+                        <div id="edit">
+                            <a href="./FactorySecondoAccessoDB?delete=${film.getId()}">
+                                Cancella il film tramite link
+                            </a><br/>
+                            <form method="post" action="./FactorySecondoAccessoDB">
+                                <input type="hidden" name="delete" value="${film.getId()}"/>
+                                <button type="submit" name="deleteBnt">
+                                    Cancella tramite pulsante
+                                </button>
+                            </form>
+                        </div>
+                    </c:if>
+
+
                     <p>
                         ${film.getRiassunto()}
                     </p>
-                 
+
                     <h2 id="cast">Cast</h2>
                     <table>
                         <tr>
@@ -156,7 +159,7 @@
                 </div>
             </div>
 
-             <!-- footer -->
+            <!-- footer -->
             <jsp:include page="footer.jsp"/>
 
         </div>
