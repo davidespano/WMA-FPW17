@@ -34,17 +34,32 @@ public class SecondoAccessoDB extends HttpServlet {
             throws ServletException, IOException {
 
         FilmFactory factory = new FilmFactory();
-        int id = Integer.parseInt(request.getParameter("id"));
-        Film film = factory.getFilmById(id);
-
-        if (film == null) {
-            request.setAttribute("titolo", "Nessun film trovato");
-        } else {
-            request.setAttribute("titolo", film.getTitolo());
-            request.setAttribute("riassunto", film.getRiassunto());
+        int id = -1;
+        Film film = null;
+        if (request.getParameter("id") != null) {
+            id = Integer.parseInt(request.getParameter("id"));
+            film = factory.getFilmById(id);
         }
 
-        
+        if (request.getParameter("delete") != null) {
+            // richiesta di cancellazione
+            int delete = Integer.parseInt(request.getParameter("delete"));
+            boolean deleted = factory.deleteFilm(delete);
+            if (deleted) {
+                // per non riscrivere una jsp diversa inserisco il messaggio
+                // in un film fittizio.
+                film = new Film();
+                film.setTitolo("Film con identificatore " + delete
+                        + " cancellato");
+            }
+        }
+
+        if (film == null) {
+            film = new Film();
+            film.setTitolo("Nessun film trovato");
+        }
+
+        request.setAttribute("film", film);
         request.getRequestDispatcher("jsp/schedaFilm.jsp").forward(request, response);
 
     }

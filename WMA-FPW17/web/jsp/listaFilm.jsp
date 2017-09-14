@@ -87,7 +87,7 @@
                         <!-- nuova versione -->
                         <c:forEach items="${films}" var="film">
                             <li>
-                                <a href="PrimoAccessoDB?id=${film.getId()}">
+                                <a href="FactorySecondoAccessoDB?id=${film.getId()}">
                                      ${film.getTitolo()}
                                 </a>
                             </li>

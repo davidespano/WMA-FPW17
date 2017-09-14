@@ -129,4 +129,18 @@ public class FilmFactory {
         
         return toReturn;
     }
+    
+    /**
+     * Questo metodo cancella il film con l'identificatore specificato
+     * @param id l'identificatore del film da cancellare
+     * @return true se il film è stato cancellato correttamente, false altrimenti. 
+     */
+    public boolean deleteFilm(int id){
+        // stub del metodo da rimpiazzare con la query
+        if(id >= 1 && id <=3){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

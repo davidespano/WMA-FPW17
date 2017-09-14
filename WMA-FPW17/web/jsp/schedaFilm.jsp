@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>CineFPW -  ${titolo}</title>
+        <title>CineFPW -  ${film.getTitolo()}</title>
         <meta name="author" content="Davide Spano" />
         <meta name="description" content="Un piccolo sito di 
               prenotazione di biglietti del Cinema" />
@@ -73,41 +73,24 @@
                 <div class="col-9">
 
 
-                    <h2 id="synopsis">${titolo}</h2>
+                    <h2 id="synopsis">${film.getTitolo()}</h2>
+                    
+                    <div id="edit">
+                        <a href="./FactorySecondoAccessoDB?delete=${film.getId()}">
+                            Cancella il film tramite link
+                        </a><br/>
+                        <form method="post" action="./FactorySecondoAccessoDB">
+                            <input type="hidden" name="delete" value="${film.getId()}"/>
+                            <button type="submit" name="deleteBnt">
+                                Cancella tramite pulsante
+                            </button>
+                        </form>
+                    </div>
                     
                     <p>
-                        ${riassunto}
+                        ${film.getRiassunto()}
                     </p>
-                    <p>
-                        In a flashback to September 1939 in London, War has been declared 
-                        with 800,000 people being evacuated from their homes. On the train, 
-                        a 27-year-old Alan Turing 
-
-                        <!-- creazione del link -->
-                        (<a href="http://www.imdb.com/name/nm1212722/">Benedict Cumberbatch</a>) 
-
-                        admires a kid doing
-                        crossword puzzles. 
-
-                        He arrives at Bletchley Park, guarded by Royal 
-                        Naval officers. He waits in the office of Commander Denniston 
-                        (Charles Dance). When the Commander arrives, Alan is cold and seems 
-                        to lack humour. 
-
-                        The Commander asks why Alan wants to work for the 
-                        government; he replies he doesn't. He mentions that he's not 
-                        very political and the Commander says it may be the shortest job 
-                        interview ever. Alan mentions he doesn't speak German but tells the 
-                        Commander that he's one of the best mathematicians in the world. 
-                        He considers German codes to be like puzzles, which he enjoys 
-                        solving. The Commander calls for Alan to be removed by his 
-                        secretary so Alan mentions Enigma, revealing he knows about the 
-                        top secret program he's being considered for. Alan explains that 
-                        Enigma is the greatest encryption device in history and if the 
-                        Allies can crack the code, it will end the war. The Commander 
-                        says everyone thinks Enigma is unbreakable. Alan says to let him 
-                        try and they'll know for sure.
-                    </p>
+                 
                     <h2 id="cast">Cast</h2>
                     <table>
                         <tr>
