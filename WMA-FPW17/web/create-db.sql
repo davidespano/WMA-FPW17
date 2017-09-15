@@ -29,6 +29,21 @@ a Il Signore degli Anelli - Il ritorno del re e Ben-Hur.)'),
 del 1998 diretto da Michael Bay. Negli Stati uniti uscì il 1 luglio del 1998, 
 mentre nelle sale Italiane arrivò il 4 settembre dello stesso anno.');
 
+(default, 'Le ali della libertà', 'Two imprisoned men bond over a number of years, 
+finding solace and eventual redemption through acts of common decency.'),
+
+(default, 'Il padrino', 'The aging patriarch of an organized crime dynasty 
+transfers control of his clandestine empire to his reluctant son.'),
+
+(default, 'Il cavaliere oscuro', 'When the menace known as the Joker emerges 
+from his mysterious past, he wreaks havoc and chaos on the people of Gotham, 
+the Dark Knight must accept one 
+of the greatest psychological and physical tests of his ability to fight injustice.'),
+
+(default, 'Schindler''s List ', 'In German-occupied Poland during World War II, 
+Oskar Schindler gradually becomes concerned for his Jewish workforce after 
+witnessing their persecution by the Nazi Germans.');
+
 
 
 create table users (

@@ -143,4 +143,52 @@ public class FilmFactory {
             return false;
         }
     }
+    
+    public List<Film> getFilmsBySearchQuery(String str){
+        List<Film> films = new ArrayList();
+        
+      
+        try {
+            // creazione e apertura della connessione
+            // si specifica la url, lo username e la password per il db
+            Connection conn = DriverManager.getConnection(
+                    Settings.DB_URL,
+                    Settings.DB_USR,
+                    Settings.DB_PSW
+            );
+            
+            // creo l'istruzione sql
+            PreparedStatement stmt = conn.prepareStatement(
+                    "select id, titolo, riassunto from film "
+                    + "where titolo like ? ");
+            
+            
+            
+            stmt.setString(1, "%" + str + "%");
+            
+            ResultSet set = stmt.executeQuery();
+            
+
+            while(set.next()){
+                
+                Film film = new Film();
+                film.setId(set.getInt("id"));
+                film.setTitolo(set.getString("titolo"));
+                film.setRiassunto(set.getString("riassunto"));
+    
+                films.add(film);
+            }
+            
+            
+          
+            
+            // Chiusura della connessione
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return films;
+    }
 }

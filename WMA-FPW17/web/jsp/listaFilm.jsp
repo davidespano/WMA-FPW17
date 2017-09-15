@@ -16,6 +16,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style2.css" type="text/css" />
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/filter.js"></script>
     </head>
     <body>
         <div class="container">
@@ -73,7 +75,10 @@
 
 
                     <h2 id="synopsis">Lista Film</h2>
-                    <ul>
+                    <label for="ricerca">Filtra film</label>
+                    <input id="ricerca" type="text" name="ricerca" /><br/>
+                    
+                    <ul id="listaFilm">
                         <!-- vecchia versione 
                         <c :forEach var="i" begin="0" end="{ids.size() -1}">
                             <li>
